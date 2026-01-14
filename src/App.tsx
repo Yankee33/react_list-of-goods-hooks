@@ -25,8 +25,16 @@ enum SortType {
 export const App: React.FC = () => {
   const [sortType, setSortType] = useState<SortType>(SortType.Default);
   const [isReversed, setIsReversed] = useState<boolean>(false);
-  const handleSortByAlphabet = () => setSortType(SortType.Alphabet);
-  const handleSortByLength = () => setSortType(SortType.Length);
+  const handleSortByAlphabet = () => {
+    setSortType(SortType.Alphabet);
+    setIsReversed(false);
+  };
+
+  const handleSortByLength = () => {
+    setSortType(SortType.Length);
+    setIsReversed(false);
+  };
+
   const handleReverse = () => setIsReversed(prev => !prev);
   const handleReset = () => {
     setSortType(SortType.Default);
@@ -75,7 +83,7 @@ export const App: React.FC = () => {
 
         <button
           type="button"
-          className="button is-warning is-light"
+          className={`button is-warning ${!isReversed ? 'is-light' : ''}`}
           onClick={handleReverse}
         >
           Reverse
